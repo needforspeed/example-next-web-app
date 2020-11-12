@@ -7,15 +7,20 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+  
       - name: Install NPM dependencies
         run: npm install
+      
       - name: Build project assets
         run: npm run build
+      
       - name: Upload site content
         uses: actions/upload-artifact@v2
         with:
           name: site-build
           path: .next/
+
+  
   distribute-project:
     name: Distribute Next.js project to GitHub Releases
     runs-on: ubuntu-latest
@@ -25,3 +30,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: site-build
+
+      - name: View content
+        run: ls -R
